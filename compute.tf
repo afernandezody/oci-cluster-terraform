@@ -164,7 +164,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "nohup sudo python -u /usr/bin/ansible-pull --url=https://github.com/ACRC/slurm-ansible-playbook.git --checkout=master --inventory=/home/opc/hosts --extra-vars=\"compartment_ocid=${var.compartment_ocid}\" site.yml &>> ansible-pull.log &",
+      "nohup sudo python -u /usr/bin/ansible-pull --url=https://github.com/afernandezody/slurm-ansible-playbook.git -checkout=master --inventory=/home/opc/hosts --extra-vars=\"compartment_ocid=${var.compartment_ocid}\" site.yml &>> ansible-pull.log &",
       "sleep 10"
     ]
 
