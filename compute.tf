@@ -164,7 +164,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
       "sleep 10"
     ]
 
@@ -207,7 +207,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
       "sleep 10"
     ]
 
