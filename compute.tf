@@ -165,7 +165,6 @@ EOF
     inline = [
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
-      "export PATH=$PATH:/usr/lib64/openmpi/bin"
       "sleep 10"
     ]
 
@@ -209,7 +208,6 @@ EOF
     inline = [
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
-      "export PATH=$PATH:/usr/lib64/openmpi/bin"
       "sleep 10"
     ]
 
