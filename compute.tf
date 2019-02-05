@@ -164,7 +164,8 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "nohup sudo python -u /usr/bin/ansible-pull --url=https://github.com/afernandezody/slurm-ansible-playbook.git -checkout=master --inventory=/home/opc/hosts --extra-vars=\"compartment_ocid=${var.compartment_ocid}\" site.yml &>> ansible-pull.log &",
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
+      "export PATH=$PATH:/usr/lib64/openmpi/bin"
       "sleep 10"
     ]
 
@@ -207,7 +208,8 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "nohup sudo python -u /usr/bin/ansible-pull --url=https://github.com/afernandezody/slurm-ansible-playbook.git --checkout=master --inventory=/home/opc/hosts site.yml &>> ansible-pull.log &",
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y"
+      "export PATH=$PATH:/usr/lib64/openmpi/bin"
       "sleep 10"
     ]
 
