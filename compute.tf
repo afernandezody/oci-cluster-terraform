@@ -164,8 +164,15 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
-      "export PATH=$PATH:/usr/lib64/openmpi/bin",
+      "sudo yum install gcc-gfortran gcc-c++ -y",
+      "git clone https://github.com/afernandezody/OMPI/",
+      "cd ~/OMPI",
+      "gunzip openmpi-4.0.0.tar.gz",
+      "tar -xvf openmpi-4.0.0.tar",
+      "cd openmpi-4.0.0",
+      "sudo ./configure --prefix=/opt/lib64/openmpi",
+      "sudo make all install",
+      "export PATH=$PATH:/opt/lib64/openmpi/bin",
       "sleep 10"
     ]
 
@@ -208,8 +215,15 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
-      "export PATH=$PATH:/usr/lib64/openmpi/bin",
+      "sudo yum install gcc-gfortran gcc-c++ -y",
+      "git clone https://github.com/afernandezody/OMPI/",
+      "cd ~/OMPI",
+      "gunzip openmpi-4.0.0.tar.gz",
+      "tar -xvf openmpi-4.0.0.tar",
+      "cd openmpi-4.0.0",
+      "sudo ./configure --prefix=/opt/lib64/openmpi",
+      "sudo make all install",
+      "export PATH=$PATH:/opt/lib64/openmpi/bin",
       "sleep 10"
     ]
 
