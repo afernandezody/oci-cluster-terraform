@@ -171,7 +171,7 @@ EOF
     connection {
       timeout = "15m"
       host = "${oci_core_instance.ClusterManagement.*.public_ip}"
-      user = "opc"
+      user = "root"
       private_key = "${file(var.private_key_path)}"
       agent = false
     }
