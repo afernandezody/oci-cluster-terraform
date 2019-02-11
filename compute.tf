@@ -172,7 +172,9 @@ EOF
       "cd openmpi-4.0.0",
       "sudo ./configure --prefix=/opt/lib64/openmpi",
       "sudo make all install",
-      "export PATH=$PATH:/opt/lib64/openmpi/bin",
+      "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
+      "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo systemctl reboot",
       "sleep 10"
     ]
 
@@ -223,7 +225,9 @@ EOF
       "cd openmpi-4.0.0",
       "sudo ./configure --prefix=/opt/lib64/openmpi",
       "sudo make all install",
-      "export PATH=$PATH:/opt/lib64/openmpi/bin",
+      "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
+      "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo systemctl reboot",
       "sleep 10"
     ]
 
