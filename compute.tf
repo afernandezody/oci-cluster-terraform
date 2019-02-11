@@ -146,9 +146,8 @@ EOF
   provisioner "file" {
     destination = "/home/opc/hosts"
     content = <<EOF
-[management]
-${oci_core_instance.ClusterManagement.display_name}
-[compute]
+MPI_CLUSTER
+${oci_core_instance.ClusterManagement.display_name},"    ",${oci_core_instance.ClusterManagement.*.public_ip}
 ${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
 EOF
 
@@ -165,8 +164,8 @@ EOF
     destination = "/etc/hosts"
     content = <<EOF
 MPI_CLUSTER
-${oci_core_instance.ClusterManagement.display_name},"    ",${oci_core_instance.ClusterManagement.*.public_ip}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
+${oci_core_instance.ClusterManagement.display_name},"    ",${oci_core_instance.ClusterManagement.*.private_ip}
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)},"    ",${oci_core_instance.ClusterManagement.*.pivate_ip}
 EOF
     connection {
       timeout = "15m"
@@ -212,24 +211,6 @@ resource "null_resource" "copy_in_setup_data_compute" {
 
   triggers {
      cluster_instance = "${oci_core_instance.ClusterCompute.*.id[count.index]}"
-  }
-
-  provisioner "file" {
-    destination = "/home/opc/hosts"
-    content = <<EOF
-[management]
-${oci_core_instance.ClusterManagement.display_name}
-[compute]
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
-EOF
-
-    connection {
-      timeout = "15m"
-      host = "${oci_core_instance.ClusterCompute.*.public_ip[count.index]}"
-      user = "opc"
-      private_key = "${file(var.private_key_path)}"
-      agent = false
-    }
   }
 
   provisioner "remote-exec" {
