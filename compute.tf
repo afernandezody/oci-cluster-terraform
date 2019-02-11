@@ -161,8 +161,26 @@ EOF
     }
   }
 
+  provisioner "file" {
+    destination = "/etc/hosts"
+    content = <<EOF
+MPI_CLUSTER
+${oci_core_instance.ClusterManagement.display_name},"    ",${oci_core_instance.ClusterManagement.*.public_ip}
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
+EOF
+    connection {
+      timeout = "15m"
+      host = "${oci_core_instance.ClusterManagement.*.public_ip}"
+      user = "opc"
+      private_key = "${file(var.private_key_path)}"
+      agent = false
+    }
+  }
+
+  
   provisioner "remote-exec" {
     inline = [
+      "mkdir ~/Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
@@ -216,6 +234,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
+      "mkdir ~/Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
