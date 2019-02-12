@@ -195,7 +195,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "make Bench",
+      "make ~/Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
@@ -248,7 +248,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "make Bench",
+      "make ~/Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
