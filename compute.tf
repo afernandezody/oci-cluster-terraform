@@ -176,11 +176,34 @@ EOF
     }
   }
   
+  provisioner "file" {
+    destination = "/home/opc/hostsP"
+    content = <<EOF
+[IP_LIST]
+${oci_core_instance.ClusterManagement.*.public_ip[count.index]}
+${oci_core_instance.ClusterCompute.*.public_ip[count.index]}
+EOF
+
+    connection {
+      timeout = "15m"
+      host = "${oci_core_instance.ClusterManagement.*.public_ip}"
+      user = "opc"
+      private_key = "${file(var.private_key_path)}"
+      agent = false
+    }
+  }
+
   provisioner "remote-exec" {
     inline = [
       "make Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
+      "git clone https://github.com/afernandezody/celta/",
+      "mv ~/celta/vigo ~/.ssh",
+      "eval $(ssh-agent -s)",
+      "eval 'ssh-agent'",
+      "chmod 400 ~/.ssh/vigo",
+      "ssh-add ~/.ssh/id_rsa",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
@@ -234,6 +257,12 @@ EOF
       "make Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
+      "git clone https://github.com/afernandezody/celta/",
+      "mv ~/celta/vigo ~/.ssh",
+      "eval $(ssh-agent -s)",
+      "eval 'ssh-agent'",
+      "chmod 400 ~/.ssh/vigo",
+      "ssh-add ~/.ssh/id_rsa",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
