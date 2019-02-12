@@ -208,7 +208,7 @@ EOF
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
       "sudo systemctl reboot",
-      "sleep 10"
+      "sleep 20"
     ]
 
     connection {
@@ -261,7 +261,7 @@ EOF
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
       "sudo systemctl reboot",
-      "sleep 10"
+      "sleep 20"
     ]
 
     connection {
