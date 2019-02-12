@@ -160,11 +160,28 @@ EOF
     }
   }
 
+  provisioner "file" {
+    destination = "/home/opc/hostsE"
+    content = <<EOF
+/home/opc/Bench    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
+EOF
+
+    connection {
+      timeout = "15m"
+      host = "${oci_core_instance.ClusterManagement.*.public_ip}"
+      user = "opc"
+      private_key = "${file(var.private_key_path)}"
+      agent = false
+    }
+  }
+  
   provisioner "remote-exec" {
     inline = [
       "make Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
+      "sudo cat hosts > /etc/hosts",
+      "sudo cat hostsE > /etc/exports",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
@@ -218,6 +235,7 @@ EOF
       "make Bench",
       "sudo yum install -y ansible git",
       "sudo yum install gcc-gfortran gcc-c++ -y",
+      "sudo cat hosts > /etc/hosts",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
