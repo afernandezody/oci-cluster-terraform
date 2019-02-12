@@ -146,10 +146,9 @@ EOF
   provisioner "file" {
     destination = "/home/opc/hosts"
     content = <<EOF
-[management]
-${oci_core_instance.ClusterManagement.display_name}
-[compute]
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
+[MPI_CLUSTER]
+${oci_core_instance.ClusterManagement.display_name}    ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
 EOF
 
     connection {
@@ -201,8 +200,8 @@ resource "null_resource" "copy_in_setup_data_compute" {
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name},${oci_core_instance.ClusterManagement.*.public_ip[count.index]}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}
+${oci_core_instance.ClusterManagement.display_name}    ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
 EOF
 
     connection {
