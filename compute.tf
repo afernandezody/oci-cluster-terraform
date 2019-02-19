@@ -197,7 +197,7 @@ EOF
     inline = [
       "make ~/Bench",
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ -y",
+      "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
@@ -250,7 +250,7 @@ EOF
     inline = [
       "make ~/Bench",
       "sudo yum install -y ansible git",
-      "sudo yum install gcc-gfortran gcc-c++ -y",
+      "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
       "cd ~/OMPI",
       "gunzip openmpi-4.0.0.tar.gz",
