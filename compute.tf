@@ -195,19 +195,8 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "make ~/Bench",
+      "sudo make ~/Bench",
       "sudo yum install -y ansible git",
-      "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
-      "git clone https://github.com/afernandezody/OMPI/",
-      "cd ~/OMPI",
-      "gunzip openmpi-4.0.0.tar.gz",
-      "tar -xvf openmpi-4.0.0.tar",
-      "cd openmpi-4.0.0",
-      "sudo ./configure --prefix=/opt/lib64/openmpi --with-mpi1-compatibility",
-      "sudo make all install",
-      "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
-      "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
-      "sudo systemctl reboot",
       "sleep 20"
     ]
 
@@ -250,17 +239,6 @@ EOF
     inline = [
       "make ~/Bench",
       "sudo yum install -y ansible git",
-      "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
-      "git clone https://github.com/afernandezody/OMPI/",
-      "cd ~/OMPI",
-      "gunzip openmpi-4.0.0.tar.gz",
-      "tar -xvf openmpi-4.0.0.tar",
-      "cd openmpi-4.0.0",
-      "sudo ./configure --prefix=/opt/lib64/openmpi --with-mpi1-compatibility",
-      "sudo make all install",
-      "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
-      "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
-      "sudo systemctl reboot",
       "sleep 20"
     ]
 
