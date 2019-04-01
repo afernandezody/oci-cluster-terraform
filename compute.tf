@@ -207,7 +207,6 @@ EOF
       "sudo make all install",
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
-      "sudo systemctl reboot",
       "sleep 20"
     ]
 
@@ -260,7 +259,6 @@ EOF
       "sudo make all install",
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
-      "sudo systemctl reboot",
       "sleep 20"
     ]
 
