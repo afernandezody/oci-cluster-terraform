@@ -164,6 +164,7 @@ EOF
     destination = "/home/opc/hostsE"
     content = <<EOF
 /home/opc/Bench    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
+/home/opc/hpl      ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
 /tmp               ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
 EOF
 
@@ -197,6 +198,16 @@ EOF
     inline = [
       "sudo make ~/Bench",
       "sudo yum install -y ansible git",
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
+      "cd /usr/local",
+      "sudo git clone https://github.com/xianyi/OpenBLAS",
+      "cd OpenBLAS",
+      "sudo make",
+      "sudo make install PREFIX=/usr/lib64/openblas",
+      "sudo echo 'export PATH=$PATH:/usr/lib64/openmpi/bin' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
+      "source ~/.bashrc",
       "sleep 20"
     ]
 
@@ -239,6 +250,17 @@ EOF
     inline = [
       "make ~/Bench",
       "sudo yum install -y ansible git",
+      "sudo yum install gcc-gfortran gcc-c++ openmpi openmpi-devel -y",
+      "cd /usr/local",
+      "sudo git clone https://github.com/xianyi/OpenBLAS",
+      "cd OpenBLAS",
+      "sudo make",
+      "sudo make install PREFIX=/usr/lib64/openblas",
+      "sudo echo 'export PATH=$PATH:/usr/lib64/openmpi/bin' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
+      "source ~/.bashrc",
+      "sleep 20"
       "sleep 20"
     ]
 
