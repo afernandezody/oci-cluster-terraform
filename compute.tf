@@ -261,7 +261,6 @@ EOF
       "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
       "source ~/.bashrc",
       "sleep 20"
-      "sleep 20"
     ]
 
     connection {
