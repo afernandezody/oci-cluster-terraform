@@ -164,6 +164,7 @@ EOF
     destination = "/home/opc/hostsE"
     content = <<EOF
 /home/opc/Bench    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
+/home/opc/hpl      ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
 /tmp               ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
 EOF
 
@@ -195,7 +196,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "make ~/Bench",
+      "cd /usr/local",
       "sudo yum install -y ansible git",
       "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
@@ -205,8 +206,18 @@ EOF
       "cd openmpi-4.0.0",
       "sudo ./configure --prefix=/opt/lib64/openmpi",
       "sudo make all install",
+      "export PATH=$PATH:/opt/lib64/openmpi/bin",
+      "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib",
+      "cd /usr/local",
+      "sudo git clone https://github.com/xianyi/OpenBLAS",
+      "cd OpenBLAS",
+      "sudo make",
+      "sudo make install PREFIX=/usr/lib64/openblas",
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
+      "source ~/.bashrc",
+      "sudo systemctl reboot",
       "sleep 20"
     ]
 
@@ -247,7 +258,7 @@ EOF
 
   provisioner "remote-exec" {
     inline = [
-      "make ~/Bench",
+      "cd /usr/local",
       "sudo yum install -y ansible git",
       "sudo yum install libibverbs gcc-gfortran gcc-c++ -y",
       "git clone https://github.com/afernandezody/OMPI/",
@@ -257,8 +268,18 @@ EOF
       "cd openmpi-4.0.0",
       "sudo ./configure --prefix=/opt/lib64/openmpi",
       "sudo make all install",
+      "export PATH=$PATH:/opt/lib64/openmpi/bin",
+      "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib",
+      "cd /usr/local",
+      "sudo git clone https://github.com/xianyi/OpenBLAS",
+      "cd OpenBLAS",
+      "sudo make",
+      "sudo make install PREFIX=/usr/lib64/openblas",
       "echo 'export PATH=$PATH:/opt/lib64/openmpi/bin' >> ~/.bashrc",
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
+      "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
+      "source ~/.bashrc",
+      "sudo systemctl reboot",
       "sleep 20"
     ]
 
