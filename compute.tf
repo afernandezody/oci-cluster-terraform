@@ -89,13 +89,13 @@ resource "null_resource" "copy_in_setup_data_mgmt" {
 
   triggers {
      cluster_instance = "${oci_core_instance.ClusterManagement.id}"
-     cluster_instance0 = "${oci_core_instance.ClusterCompute.0}"
-     cluster_instance1 = "${oci_core_instance.ClusterCompute.1}"
-     cluster_instance2 = "${oci_core_instance.ClusterCompute.2}"
-     cluster_instance3 = "${oci_core_instance.ClusterCompute.3}"
-     cluster_instance4 = "${oci_core_instance.ClusterCompute.4}"
-     cluster_instance5 = "${oci_core_instance.ClusterCompute.5}"
-     cluster_instance6 = "${oci_core_instance.ClusterCompute.6}"
+#     cluster_instance0 = "${oci_core_instance.ClusterCompute.0}"
+#     cluster_instance1 = "${oci_core_instance.ClusterCompute.1}"
+#     cluster_instance2 = "${oci_core_instance.ClusterCompute.2}"
+#     cluster_instance3 = "${oci_core_instance.ClusterCompute.3}"
+#     cluster_instance4 = "${oci_core_instance.ClusterCompute.4}"
+#     cluster_instance5 = "${oci_core_instance.ClusterCompute.5}"
+#     cluster_instance6 = "${oci_core_instance.ClusterCompute.6}"
   }
 
   provisioner "file" {
@@ -248,13 +248,15 @@ resource "null_resource" "copy_in_setup_data_compute" {
 
   triggers {
      cluster_instanceM = "${oci_core_instance.ClusterManagement.id}"
-     cluster_instance0 = "${oci_core_instance.ClusterCompute.0}"
-     cluster_instance1 = "${oci_core_instance.ClusterCompute.1}"
-     cluster_instance2 = "${oci_core_instance.ClusterCompute.2}"
-     cluster_instance3 = "${oci_core_instance.ClusterCompute.3}"
-     cluster_instance4 = "${oci_core_instance.ClusterCompute.4}"
-     cluster_instance5 = "${oci_core_instance.ClusterCompute.5}"
-     cluster_instance6 = "${oci_core_instance.ClusterCompute.6}"
+#     clusterGroup=
+     tonto=0
+     cluster_instance0 = "${oci_core_instance.ClusterCompute.*.tonto}"
+#     cluster_instance1 = "${oci_core_instance.ClusterCompute.1}"
+#     cluster_instance2 = "${oci_core_instance.ClusterCompute.2}"
+#     cluster_instance3 = "${oci_core_instance.ClusterCompute.3}"
+#     cluster_instance4 = "${oci_core_instance.ClusterCompute.4}"
+#     cluster_instance5 = "${oci_core_instance.ClusterCompute.5}"
+#     cluster_instance6 = "${oci_core_instance.ClusterCompute.6}"
   }
 
   provisioner "file" {
