@@ -147,7 +147,7 @@ EOF
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip}
 ${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
 EOF
 
@@ -233,7 +233,7 @@ resource "null_resource" "copy_in_setup_data_compute" {
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip}
 ${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
 EOF
 
