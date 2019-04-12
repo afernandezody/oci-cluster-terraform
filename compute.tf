@@ -1,3 +1,6 @@
+###############################################
+### This is the compute node (resource)
+###############################################
 resource "oci_core_instance" "ClusterCompute" {
   count               = "${length(var.InstanceADIndex)}"
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.InstanceADIndex[count.index] - 1], "name")}"
@@ -37,6 +40,9 @@ resource "oci_core_instance" "ClusterCompute" {
   }
 }
 
+###############################################
+### This is the master node (resource)
+###############################################
 resource "oci_core_instance" "ClusterManagement" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.ManagementAD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
@@ -73,11 +79,23 @@ resource "oci_core_instance" "ClusterManagement" {
   }
 }
 
+
+
+###############################################
+### This is the script for the master node 
+###############################################
 resource "null_resource" "copy_in_setup_data_mgmt" {
   depends_on = ["oci_core_instance.ClusterManagement"]
 
   triggers {
      cluster_instance = "${oci_core_instance.ClusterManagement.id}"
+     cluster_instance0 = "${oci_core_instance.ClusterCompute.*.0}"
+     cluster_instance1 = "${oci_core_instance.ClusterCompute.*.1}"
+     cluster_instance2 = "${oci_core_instance.ClusterCompute.*.2}"
+     cluster_instance3 = "${oci_core_instance.ClusterCompute.*.3}"
+     cluster_instance4 = "${oci_core_instance.ClusterCompute.*.4}"
+     cluster_instance5 = "${oci_core_instance.ClusterCompute.*.5}"
+     cluster_instance6 = "${oci_core_instance.ClusterCompute.*.6}"
   }
 
   provisioner "file" {
@@ -221,12 +239,22 @@ EOF
   }
 }
 
+###############################################
+### This is the script for the compute node 
+###############################################
 resource "null_resource" "copy_in_setup_data_compute" {
   count = "${length(var.InstanceADIndex)}"
   depends_on = ["oci_core_instance.ClusterCompute"]
 
   triggers {
-     cluster_instance = "${oci_core_instance.ClusterCompute.*.id[count.index]}"
+     cluster_instanceM = "${oci_core_instance.ClusterManagement.id}"
+     cluster_instance0 = "${oci_core_instance.ClusterCompute.*.0}"
+     cluster_instance1 = "${oci_core_instance.ClusterCompute.*.1}"
+     cluster_instance2 = "${oci_core_instance.ClusterCompute.*.2}"
+     cluster_instance3 = "${oci_core_instance.ClusterCompute.*.3}"
+     cluster_instance4 = "${oci_core_instance.ClusterCompute.*.4}"
+     cluster_instance5 = "${oci_core_instance.ClusterCompute.*.5}"
+     cluster_instance6 = "${oci_core_instance.ClusterCompute.*.6}"
   }
 
   provisioner "file" {
