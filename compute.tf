@@ -147,8 +147,8 @@ EOF
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}          
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)} 
 EOF
 
     connection {
@@ -217,8 +217,7 @@ EOF
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
       "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
       "source ~/.bashrc",
-      "sudo systemctl reboot",
-      "sleep 20"
+      "sleep 60"
     ]
 
     connection {
@@ -243,8 +242,8 @@ resource "null_resource" "copy_in_setup_data_compute" {
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}     
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)} 
 EOF
 
     connection {
@@ -279,8 +278,7 @@ EOF
       "echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib64/openmpi/lib' >> ~/.bashrc",
       "sudo echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openblas/lib' >> ~/.bashrc",
       "source ~/.bashrc",
-      "sudo systemctl reboot",
-      "sleep 20"
+      "sleep 60"
     ]
 
     connection {
