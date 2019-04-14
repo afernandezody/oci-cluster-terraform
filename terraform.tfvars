@@ -1,7 +1,7 @@
 ### Authentication details
 tenancy_ocid = "ocid1.tenancy.oc1..aaaaaaaacr6j4eeqkro4mu7s3cn273d7gacbv72umu7caa2keelbzbil3clq"
 user_ocid = "ocid1.user.oc1..aaaaaaaastba2wpfl2rsyvptgfhygpkqpyeeggmqclfhxzf7an5pdn5cpbdq"
-fingerprint = "fb:5e:de:79:87:65:f2:73:a9:8b:b5:1f:ac:c9:b5:0b"
+fingerprint = "62:d5:ed:76:12:69:80:89:32:8b:5b:78:65:bc:ca:7c"
 private_key_path = "/home/opc/.oci/oci_api_key.pem"
 
 ### Region
