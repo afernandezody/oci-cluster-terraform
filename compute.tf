@@ -147,8 +147,8 @@ EOF
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}          
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)}   
 EOF
 
     connection {
@@ -164,7 +164,6 @@ EOF
     destination = "/home/opc/hostsE"
     content = <<EOF
 /home/opc/Bench    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
-/tmp               ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}(rw,sync,no_root_squash,no_all_squash)
 EOF
 
     connection {
@@ -232,8 +231,8 @@ resource "null_resource" "copy_in_setup_data_compute" {
     destination = "/home/opc/hosts"
     content = <<EOF
 [MPI_CLUSTER]
-${oci_core_instance.ClusterManagement.display_name}          ${oci_core_instance.ClusterManagement.*.private_ip[count.index]}
-${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    ${oci_core_instance.ClusterCompute.*.private_ip[count.index]}
+${oci_core_instance.ClusterManagement.display_name}          
+${join("\n", oci_core_instance.ClusterCompute.*.display_name)}    
 EOF
 
     connection {
